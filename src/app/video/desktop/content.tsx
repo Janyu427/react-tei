@@ -38,33 +38,6 @@ const App = (props: Props) => {
         setOtherVideos(items);
     }, [props.videoLists.video]);
 
-    // const getFirstVideo = () => {
-    //     for (let i = 0; i < props.videoLists.video.length; i ++) {
-    //         const item = props.videoLists.video[i];
-
-    //         if (item.key == "1") {
-    //             return item;
-    //         }
-    //     };
-    // };
-
-    // const getOtherVideos = () => {
-    //     let items: any[] = [];
-
-    //     for (let i = 0; i < props.videoLists.video.length; i ++) {
-    //         const item = props.videoLists.video[i];
-
-    //         if (item.key != "1") {
-    //             items.push(item);
-    //         }
-    //     };
-
-    //     return items;
-    // };
-
-    // const firstVideo = getFirstVideo();
-    // const otherVideos = getOtherVideos();
-
     return (
         <div className="relative before:content-[''] before:absolute before:top-[100px] before:left-0 
                     before:w-[100%] before:h-[100%] before:bg-[#f5f5f5] after:content-[''] after:absolute 
