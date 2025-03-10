@@ -7,6 +7,8 @@ import structuredData from "@/assets/script/structuredData";
 
 import { headers } from "next/headers";
 
+type Params = Promise<{ id: string }>;
+
 export const generateStaticParams = async () => {
     const res = await api.product.getDetails.getFetch();
 
@@ -23,10 +25,10 @@ export const generateStaticParams = async () => {
     return paths;
 };
 
-export const generateMetadata = async ({ params }: { params: { id: string } }) => {
+export const generateMetadata = async ({ params }: { params: Params }) => {
     const productDetails = await api.product.getDetails.getFetch();
 
-    const { id } = await params;
+    const { id } = await params
 
     const productOrder = parseInt(id) - 1;
 
@@ -47,7 +49,7 @@ export const generateMetadata = async ({ params }: { params: { id: string } }) =
     };
 };
 
-const App = async ({ params }: { params: { id: string } }) => {
+const App = async ({ params }: { params: Params }) => {
     const headersList = await headers();
     const userAgent = headersList.get("user-agent") || "";
     const isMobile = /mobile/i.test(userAgent);
