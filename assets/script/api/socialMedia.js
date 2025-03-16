@@ -1,7 +1,7 @@
 
-const getRequest = (categoryId) => {
+const getRequest = () => {
     return {
-        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/innerPageTitle/${categoryId}`,
+        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/socialMedia`,
         obj: {
             method: "GET",
             headers: {
@@ -12,13 +12,13 @@ const getRequest = (categoryId) => {
     };
 };
 
-const getFetch = (categoryId) => {
-    const request = getRequest(categoryId);
+const getFetch = () => {
+    const request = getRequest();
 
     return fetch(request.url, request.obj).then((response) => {
         return response.json();
     }).catch((err) => {
-        throw err;
+        throw err
     });
 };
 

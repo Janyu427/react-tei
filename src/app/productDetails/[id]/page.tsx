@@ -10,29 +10,29 @@ import { headers } from "next/headers";
 type Params = Promise<{ id: string }>;
 
 export const generateStaticParams = async () => {
-    const res = await api.product.getDetails.getFetch();
+    const productLists = await api.product.getFetch();
 
     const paths = [];
 
-    for (let i = 0; i < res.productDetails.length; i ++) {
-        const path = res.productDetails[i].productId;
+    for (let i = 0; i < productLists.result.length; i ++) {
+        for (let j = 0; j < productLists.result[i].items.length; j ++) {
+            const path = productLists.result[i].items[j].itemNumber;
 
-        paths.push(
-            { id: path }
-        );
+            paths.push(
+                { id: path }
+            );
+        }
     };
 
     return paths;
 };
 
 export const generateMetadata = async ({ params }: { params: Params }) => {
-    const productDetails = await api.product.getDetails.getFetch();
-
     const { id } = await params
 
-    const productOrder = parseInt(id) - 1;
+    const productDetails = await api.productDetails.getFetch(id);
 
-    const productName = productDetails.productDetails[productOrder].title;
+    const productName = productDetails.title;
 
     return {
         title: `${productName}｜${process.env.NEXT_PUBLIC_SITE_NAME}`,
@@ -54,29 +54,21 @@ const App = async ({ params }: { params: Params }) => {
     const userAgent = headersList.get("user-agent") || "";
     const isMobile = /mobile/i.test(userAgent);
 
-    const innerPageTitle = await api.innerPageTitle.getFetch();
-    const productDetails = await api.product.getDetails.getFetch();
-    let product = await api.product.getCategory.getFetch();
+    let product = await api.product.getFetch();
 
-    product = product.product;
+    product = product.result;
 
     const { id } = await params;
 
-    const productOrder = parseInt(id) - 1;
     const path = headersList.get("x-current-path")?.split("/")[1];
-    const productName = productDetails.productDetails[productOrder].title;
 
-    let pageName = "";
+    const innerPageTitle = await api.innerPageTitle.getFetch(path);
 
-    for (let i = 0; i < innerPageTitle.InnerBannerPageTitle.length; i ++) {
-        const item = innerPageTitle.InnerBannerPageTitle[i];
+    const pageName = innerPageTitle.title;
 
-        if (item.key == path) {
-            pageName = item.title;
+    const productDetails = await api.productDetails.getFetch(id);
 
-            break;
-        }
-    };
+    const productName = productDetails.title;
 
     return (
         <>

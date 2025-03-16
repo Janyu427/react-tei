@@ -1,7 +1,7 @@
 
 const getRequest = () => {
     return {
-        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/about.json`,
+        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/about`,
         obj: {
             method: "GET",
             headers: {

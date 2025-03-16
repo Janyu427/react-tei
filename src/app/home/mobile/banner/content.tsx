@@ -12,24 +12,23 @@ import { register } from "swiper/element/bundle";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectFade, Autoplay} from "swiper/modules";
 
+import logotypeWhite from "@/public/logotype.svg";
+import logoIcon from "@/public/logo_icon.svg";
+
 import "swiper/css";
 import "swiper/css/effect-fade";
 
 interface Props {
-    banner: {
-        banner: bannerItem []
-    },
-    companyInfo: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    };
+    banner: bannerItem [],
+    menu: menuItem [],
+    contactInfo: infoItem [],
+};
+
+interface menuItem {
+    key: string,
+    title: string,
+    titleTag: string,
+    link: string
 };
 
 interface infoItem {
@@ -37,18 +36,6 @@ interface infoItem {
     title: string,
     titleTag: string,
     text: string,
-    link: string
-};
-
-interface socialMediaItem {
-    key: string,
-    titleTag: string,
-    link: string
-};
-
-interface navListItem {
-    title: string,
-    titleTag: string,
     link: string
 };
 
@@ -81,7 +68,7 @@ const App = (props: Props) => {
             >
                 <div className="absolute w-[90%] flex justify-between items-center top-[30px] left-[5%] z-10">
                     <Link className="max-w-[320px] max-[1200px]:max-w-[200px]" href="" title="程翊室內設計">
-                        <Image className="image w-[100%]" src={props.companyInfo.logo.logotypeWhite} width={320} height={90} alt={props.companyInfo.logo.alt} priority={true} />
+                        <Image className="image w-[100%]" src={logotypeWhite} width={320} height={90} alt="程翊室內設計" priority={true} />
                     </Link>
                     <div className="burger hidden max-[992px]:block" onClick={() => setOpenMenu(true)}>
                         <div className="w-[28px] h-[1px] bg-[#fff] rounded-[5px] my-[8px] mr-0 ml-auto"></div>
@@ -91,7 +78,7 @@ const App = (props: Props) => {
                 </div>
 
                 {
-                    props.banner.banner.map((item: bannerItem, index: number) => {
+                    props.banner.map((item: bannerItem, index: number) => {
                         return (
                             <SwiperSlide className="relative" key={index}>
                                 <div className="swiper-image relative h-[100vh] after:content-[''] after:absolute after:top-0 after:left-0 after:w-[100%] after:h-[100%] after:bg-black after:bg-opacity-30">
@@ -107,7 +94,7 @@ const App = (props: Props) => {
                                 before:content-[''] before:absolute before:left-[50%] before:bottom-0 before:w-[1px] before:h-[60px] before:bg-[#fff] before:translate-x-[-50%]">SCROLL</p>
                 </div>
                 <div className="absolute right-[5%] bottom-[50px] z-10">
-                    <Image className="image" src={props.companyInfo.logo.icon} width={80} height={78} alt="" priority={true} />
+                    <Image className="image" src={logoIcon} width={80} height={78} alt="" priority={true} />
                 </div>
             </Swiper>
 
@@ -115,7 +102,7 @@ const App = (props: Props) => {
                 (() => {
                     if (openMenu) {
                         return (
-                            <Aside companyInfo={props.companyInfo} setOpenMenu={setOpenMenu} />
+                            <Aside menu={props.menu} contactInfo={props.contactInfo} setOpenMenu={setOpenMenu} />
                         );
                     }
                 })()

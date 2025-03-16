@@ -4,7 +4,9 @@ import api from "@/assets/script/api";
 import Content from "./content";
 
 const App = async () => {
-    const videoLists = await api.videoSection.getFetch();
+    let videoLists = await api.video.getFetch();
+
+    videoLists = videoLists.result;
 
     return (
         <Content videoLists={videoLists} />

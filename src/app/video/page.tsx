@@ -26,21 +26,11 @@ const App = async () => {
     const userAgent = headersList.get("user-agent") || "";
     const isMobile = /mobile/i.test(userAgent);
 
-    const innerPageTitle = await api.innerPageTitle.getFetch();
-
     const path = headersList.get("x-current-path")?.split("/")[1];
 
-    let pageName = "";
+    const innerPageTitle = await api.innerPageTitle.getFetch(path);
 
-    for (let i = 0; i < innerPageTitle.InnerBannerPageTitle.length; i ++) {
-        const item = innerPageTitle.InnerBannerPageTitle[i];
-
-        if (item.key == path) {
-            pageName = item.title;
-
-            break;
-        }
-    };
+    const pageName = innerPageTitle.title;
 
     return (
         <>            

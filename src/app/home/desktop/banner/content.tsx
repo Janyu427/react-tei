@@ -5,6 +5,8 @@ import React from 'react';
 import Link from "next/link";
 import Image from "next/image";
 
+import logotypeWhite from "@/public/logotype.svg";
+import logoIcon from "@/public/logo_icon.svg";
 import facebook from "@/public/facebook-f.svg";
 import instagram from "@/public/instagram.svg";
 import youtube from "@/public/youtube.svg";
@@ -19,38 +21,11 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 
 interface Props {
-    banner: {
-        banner: bannerItem []
-    },
-    companyInfo: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    };
+    banner: bannerItem [],
+    menu: menuItem [],
 };
 
-interface infoItem {
-    key: string,
-    title: string,
-    titleTag: string,
-    text: string,
-    link: string
-};
-
-interface socialMediaItem {
-    key: string,
-    titleTag: string,
-    link: string
-};
-
-
-interface navListItem {
+interface menuItem {
     title: string,
     titleTag: string,
     link: string
@@ -82,12 +57,12 @@ const App = (props: Props) => {
         >
             <div className="absolute w-[90%] flex justify-between items-center top-[30px] left-[5%] z-10">
                 <Link className="max-w-[250px]" href="" title="程翊室內設計">
-                    <Image className="image w-[100%]" src={props.companyInfo.logo.logotypeWhite} width={320} height={90} alt={props.companyInfo.logo.alt} priority={true} />
+                    <Image className="image w-[100%]" src={logotypeWhite} width={320} height={90} alt="程翊室內設計" priority={true} />
                 </Link>
                 <div>
                     <ul className="flex">
                         {
-                            props.companyInfo.navList.map((item: navListItem, index: number) => {
+                            props.menu.map((item: menuItem, index: number) => {
                                 return (
                                     <li className="list" key={index}>
                                         <Link className="text-[18px] text-[#fff] px-[15px] hover:text-[#999]" href={item.link} title={item.titleTag}>{item.title}</Link>
@@ -118,7 +93,7 @@ const App = (props: Props) => {
             </div>
 
             {
-                props.banner.banner.map((item: bannerItem, index: number) => {
+                props.banner.map((item: bannerItem, index: number) => {
                     return (
                         <SwiperSlide className="relative" key={index}>
                             <div className="swiper-image relative h-[100vh] after:content-[''] after:absolute after:top-0 after:left-0 after:w-[100%] after:h-[100%] after:bg-black after:bg-opacity-30">
@@ -134,7 +109,7 @@ const App = (props: Props) => {
                             before:content-[''] before:absolute before:left-[50%] before:bottom-0 before:w-[1px] before:h-[60px] before:bg-[#fff] before:translate-x-[-50%]">SCROLL</p>
             </div>
             <div className="absolute right-[5%] bottom-[50px] z-10">
-                <Image className="image" src={props.companyInfo.logo.icon} width={80} height={78} alt="" priority={true} />
+                <Image className="image" src={logoIcon} width={80} height={78} alt="" priority={true} />
             </div>
         </Swiper>
     );

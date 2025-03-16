@@ -3,32 +3,18 @@
 
 import Link from "next/link";
 import Image from "next/image";
+
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 
 import clsx from "clsx";
 
-interface Props {
-    header: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    }
-};
+import logo from "@/public/logo.svg";
 
-interface infoItem {
-    key: string,
-    title: string,
-    titleTag: string,
-    text: string,
-    link: string
+interface Props {
+    menu: menuItem [],
+    socialMedia: socialMediaItem [],
 };
 
 interface socialMediaItem {
@@ -37,7 +23,7 @@ interface socialMediaItem {
     link: string
 };
 
-interface navListItem {
+interface menuItem {
     key: string,
     title: string,
     titleTag: string,
@@ -76,19 +62,19 @@ const App = (props: Props) => {
         )} ref={headerRef}>
             <div className="w-[90%] max-w-[1140px] mx-auto flex justify-between items-center">
                     <Link href="/" title="程翊室內裝修" >
-                        <Image className="image" src={props.header.logo.logoNormal} alt={props.header.logo.alt} width={226} height={50} priority={true} />
+                        <Image className="image" src={logo} alt="程翊室內裝修" width={226} height={50} priority={true} />
                     </Link>
 
                     <ul className="flex items-center">
 
                         {
-                            props.header.navList.map((item: navListItem, index: number) => {
+                            props.menu.map((item: menuItem, index: number) => {
                                 return (
                                     <li className="list pr-[15px]" key={index}>
                                         <Link className={clsx(
                                             "block hover:text-[#231916]",
                                             {
-                                                "pr-0": index > props.header.navList.length - 1,
+                                                "pr-0": index > props.menu.length - 1,
                                                 "text-[#231916]": item.link == pathName,
                                                 "text-[#666]": item.link != pathName
                                             }

@@ -1,7 +1,13 @@
 
-const getRequest = () => {
+const getRequest = (categoryId) => {
+    let url = `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/product`;
+
+    if (categoryId) {
+        url += `?categoryId=${categoryId}`;
+    }
+
     return {
-        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/video.json`,
+        url: url,
         obj: {
             method: "GET",
             headers: {
@@ -12,14 +18,14 @@ const getRequest = () => {
     };
 };
 
-const getFetch = () => {
-    const request = getRequest();
+const getFetch = (categoryId) => {
+    const request = getRequest(categoryId);
 
     return fetch(request.url, request.obj).then((response) => {
         return response.json();
     }).catch((err) => {
-        throw err;
-    })
+        throw err
+    });
 };
 
 const app = {

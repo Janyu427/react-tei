@@ -2,6 +2,8 @@
 import ProviderSection from "@/assets/script/provider";
 import structuredData from "@/assets/script/structuredData";
 
+import NextTopLoader from "nextjs-toploader";
+
 import "@/assets/styles/globals/style.scss";
 
 export const viewport = {
@@ -75,6 +77,7 @@ const App = async ({ children }: { children: React.ReactNode }) => {
                 <body>
                     <ProviderSection>
                         {children}
+                        <NextTopLoader color="#7c7c7c" showSpinner={false} />
                     </ProviderSection>
                 </body>
             </html>

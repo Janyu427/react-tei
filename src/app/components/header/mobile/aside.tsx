@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import clsx from "clsx";
 
+import logo from "@/public/logo.svg";
 import facebook from "@/public/facebook-f.svg";
 import instagram from "@/public/instagram.svg";
 import youtube from "@/public/youtube.svg";
@@ -14,17 +15,8 @@ import { usePathname } from "next/navigation";
 
 interface Props {
     setOpenMenu: (value: boolean) => void,
-    companyInfo: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    }
+    menu: menuItem [],
+    contactInfo: infoItem [],
 };
 
 interface infoItem {
@@ -35,14 +27,10 @@ interface infoItem {
     link: string
 };
 
-interface socialMediaItem {
+interface menuItem {
     key: string,
-    titleTag: string,
-    link: string
-};
-
-interface navListItem {
     title: string,
+    titleTag: string,
     link: string
 };
 
@@ -53,7 +41,7 @@ const App = (props: Props) => {
         <>
             {
                 (() => {
-                    if (props.companyInfo) {
+                    if (props.menu && props.contactInfo) {
                         return (
                             <div className="fixed w-[100vw] h-[100vh] top-0 left-0 bg-[#fff] z-[99]">
                                 <div className="absolute w-[80px] h-[80px] top-0 right-0 p-[10px] bg-[#c4c4c4] cursor-pointer" onClick={() => {props.setOpenMenu(false)}}>
@@ -62,14 +50,14 @@ const App = (props: Props) => {
                                 </div>
                                 <div className="w-[90%] max-w-[1140px] mx-auto container pt-[100px] px-5%">
                                     <Link className="logo_box block mb-[60px]" href="/" title="Janyu" target="_self">
-                                        <Image className="image w-[100%] max-w-[270px]" src={props.companyInfo.logo.logoNormal} width="270" height="60" alt={props.companyInfo.logo.alt}/>
+                                        <Image className="image w-[100%] max-w-[270px]" src={logo} width="270" height="60" alt="程翊室內裝修"/>
                                     </Link>
         
                                     <ul className="relative p-[15px] mb-[30px] 
                                                 before:content[''] before:absolute before:bottom-0 before:left-[15px] before:w-[40px] 
                                                 before:h-[1px] before:bg-[#dcdcdc]">
                                         {
-                                            props.companyInfo.navList.map((item: navListItem, index: number) => {
+                                            props.menu.map((item: menuItem, index: number) => {
                                                 return (
                                                     <li className="px-0 py-[15px]" key={index}>
                                                         <Link className={clsx(
@@ -91,7 +79,7 @@ const App = (props: Props) => {
                                                     
                                         <div className="mb-[5px]">
                                             {
-                                                props.companyInfo.basicInfo.map((item: infoItem, index: number) => (
+                                                props.contactInfo.map((item: infoItem, index: number) => (
                                                     item.key == "address" ? (
                                                         <a className="text-[#231916] font-medium" href={item.link} title={item.titleTag} key={index} target="_blank">{item.text}</a>
                                                     ) : null
@@ -101,12 +89,12 @@ const App = (props: Props) => {
         
                                         <div className="flex items-center flex-wrap">
                                             {
-                                                props.companyInfo.basicInfo.map((item: infoItem, index: number) => (
+                                                props.contactInfo.map((item: infoItem, index: number) => (
                                                     item.key != "address" ? (
                                                         <div className={clsx(
                                                             "mr-[20px]",
                                                             {
-                                                                "mr-0": index == props.companyInfo.basicInfo.length - 1
+                                                                "mr-0": index == props.contactInfo.length - 1
                                                             }
                                                         )} key={index}>
                                                             <span>{item.title}</span>

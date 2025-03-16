@@ -7,9 +7,7 @@ import Poster from "../../../../components/poster/desktop";
 
 interface Props {
     id: string,
-    productLists: {
-        product: productItem []
-    };
+    productLists: productItem []
 };
 
 interface productItem {
@@ -37,7 +35,7 @@ const App = (props: Props) => {
         const allItems: item [] = [];
         const otherItems: item [] = [];
 
-        props.productLists.product.map((item: productItem) => {
+        props.productLists.map((item: productItem) => {
             allItems.push(...item.items)
         });
 

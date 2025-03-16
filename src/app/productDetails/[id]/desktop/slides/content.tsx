@@ -11,7 +11,7 @@ import prevArrow from "@/public/swiper_arrow_left.svg";
 import nextArrow from "@/public/swiper_arrow_right.svg";
 
 interface Props {
-    detailsContent: {
+    detailContent: {
         productId: string,
         title: string,
         intro: string,
@@ -39,7 +39,7 @@ const App = (props: Props) => {
     const [scrollOffset, setScrollOffset] = useState<number>(0);
 
     useEffect(() => {
-        if (!props.detailsContent) {
+        if (!props.detailContent) {
             return;
         }
 
@@ -81,7 +81,7 @@ const App = (props: Props) => {
                 currentCarousel.removeEventListener("scroll", exe);
             }
         };
-    }, [props.detailsContent]);
+    }, [props.detailContent]);
 
     const handlePrevClick = () => {
         if (carouselRef.current && imgRefs.current && activeIndex > 0) {
@@ -125,27 +125,27 @@ const App = (props: Props) => {
         <>
             {
                 (() => {
-                    if (props.detailsContent) {
+                    if (props.detailContent) {
                         return (
                             <div className="bg-[#f5f5f5] pt-[60px]">
                                 <div className="w-[90%] max-w-[1140px] mx-auto pb-[60px]">
                                     <div>
                                         <h2 className="relative pb-[15px] mb-[20px] before:content-[''] 
                                                     before:absolute before:left-0 before:bottom-0 before:w-[20px] before:h-[1px] 
-                                                    before:bg-[#999]">{props.detailsContent.title}</h2>
-                                        <p className="text">{props.detailsContent.intro}</p>
+                                                    before:bg-[#999]">{props.detailContent.title}</h2>
+                                        <p className="text">{props.detailContent.intro}</p>
                                     </div>
                                 </div>
                                 <div className="overflow-visible">
                                     <div className="flex w-[90%] max-w-[1140px] mx-auto overflow-x-scroll snap-x snap-mandatory scrollbarHide" ref={carouselRef}>
                                         {
-                                            props.detailsContent.carouselImgs.map((item: string, index: number) => {
+                                            props.detailContent.carouselImgs.map((item: string, index: number) => {
                                                 return (
                                                     <div className={clsx(
                                                         "relative block w-[90%] min-w-[90%] snap-start pb-[66.6666%] bg-[#dcdcdc]",
                                                         {
-                                                            "mr-[5%]": index != props.detailsContent.carouselImgs.length - 1,
-                                                            "mr-0": index == props.detailsContent.carouselImgs.length - 1,
+                                                            "mr-[5%]": index != props.detailContent.carouselImgs.length - 1,
+                                                            "mr-0": index == props.detailContent.carouselImgs.length - 1,
                                                             "opacity-70": activeIndex != index,
                                                         }
                                                     )} key={index}>
@@ -169,12 +169,12 @@ const App = (props: Props) => {
                                                 before:bottom-[22px] before:left-0 z-[1] before:w-[45px] before:h-[1px] before:bg-[#999] 
                                                 before:-rotate-45">
                                         <span className="count absolute top-0 left-0 text-[#121212]">{activeIndex + 1}</span>
-                                        <span className="total absolute bottom-0 right-[5px] text-[#999]">{props.detailsContent.carouselImgs.length}</span>
+                                        <span className="total absolute bottom-0 right-[5px] text-[#999]">{props.detailContent.carouselImgs.length}</span>
                                     </div>
                                     <div className={clsx(
                                         "relative w-[60px] bg-transparent test",
                                         {
-                                            "opacity-35": activeIndex == props.detailsContent.carouselImgs.length - 1
+                                            "opacity-35": activeIndex == props.detailContent.carouselImgs.length - 1
                                         }
                                     )} onClick={handleNextClick}>
                                         <Image src={nextArrow} width={62} height={8} alt="下一個" />

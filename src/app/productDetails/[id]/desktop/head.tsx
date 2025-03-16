@@ -6,9 +6,11 @@ interface Props {
 };
 
 const generateMetadata = async (props: Props) => {
-    const productDetails = await api.product.getDetails.getFetch();
     const id = props.id;
-    const productName = productDetails.productDetails[id].title;
+    
+    const productDetails = await api.productDetails.getFetch(id);
+    
+    const productName = productDetails.title;
 
     return {
         title: `${productName}｜${process.env.NEXT_PUBLIC_SITE_NAME}`,

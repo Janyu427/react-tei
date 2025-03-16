@@ -5,9 +5,7 @@ import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 interface Props {
-    videoLists: {
-        video: videoItem []
-    };
+    videoLists: videoItem [];
 };
 
 interface videoItem {
@@ -24,8 +22,8 @@ const App = (props: Props) => {
     useEffect(() => {
         const items: videoItem [] = [];
 
-        for (let i = 0; i < props.videoLists.video.length; i ++) {
-            const item = props.videoLists.video[i];
+        for (let i = 0; i < props.videoLists.length; i ++) {
+            const item = props.videoLists[i];
 
             if (item.key == "1") {
                 setFirstVideo(item);
@@ -36,7 +34,7 @@ const App = (props: Props) => {
         };
 
         setOtherVideos(items);
-    }, [props.videoLists.video]);
+    }, [props.videoLists]);
 
     return (
         <div className="relative before:content-[''] before:absolute before:top-[100px] before:left-0 

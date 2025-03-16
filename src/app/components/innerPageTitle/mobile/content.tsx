@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useEffect, useRef } from "react";
 
 interface Props {
-    data: {
+    innerPageTitle: {
         title: string,
         enTitle: string,
         titleImgUrl: string
@@ -36,17 +36,17 @@ const App = (props: Props) => {
             <div className="flex justify-between items-end mx-auto w-[90%] max-w-[1140px]">
                 {
                     (() => {
-                        if (props.data) {
+                        if (props.innerPageTitle) {
                             return (
                                 <>
                                     <div className="flex items-end">
-                                        <div className="vertical_text text-[#231916] text-[20px] mr-[20px] tracking-[5px]">{props.data.title}</div>
+                                        <div className="vertical_text text-[#231916] text-[20px] mr-[20px] tracking-[5px]">{props.innerPageTitle.title}</div>
                                         <p className="relative text-[#666] pl-[45px] mb-[15px] before:content-[''] 
                                                     before:absolute before:top-[50%] before:left-0 before:w-[30px] before:h-[1px] 
-                                                    before:translate-y-[-50%] before:bg-[#999]">{props.data.enTitle}</p>
+                                                    before:translate-y-[-50%] before:bg-[#999]">{props.innerPageTitle.enTitle}</p>
                                     </div>
 
-                                    <Image className="image max-w-[150px] w-auto h-[100%]" src={props.data.titleImgUrl} width={184} height={70} alt=""/>
+                                    <Image className="image max-w-[150px] w-auto h-[100%]" src={props.innerPageTitle.titleImgUrl} width={184} height={70} alt=""/>
                                 </>
                             );
                         }

@@ -1,7 +1,7 @@
 
 const getRequest = () => {
     return {
-        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/products.json`,
+        url: `${process.env.NEXT_PUBLIC_DATA_URL_BASE}/contactInfo`,
         obj: {
             method: "GET",
             headers: {
@@ -17,7 +17,7 @@ const getFetch = () => {
 
     return fetch(request.url, request.obj).then((response) => {
         return response.json();
-    }).catch((err) =>{
+    }).catch((err) => {
         throw err
     });
 };

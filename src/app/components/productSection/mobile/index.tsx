@@ -4,10 +4,10 @@ import api from "@/assets/script/api";
 import Content from "./content";
 
 const App = async () => {
-    let product = await api.product.getCategory.getFetch();
+    let product = await api.product.getFetch();
 
     product = [
-        ...product.product, 
+        ...product.result, 
         { 
             key: "categoryAll", 
             title: "所有", 

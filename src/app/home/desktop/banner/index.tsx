@@ -4,11 +4,14 @@ import api from "@/assets/script/api";
 import Content from "./content";
 
 const App = async () => {
-    const banner = await api.banner.getFetch();
-    const companyInfo = await api.companyInfo.getFetch();
+    let banner = await api.banner.getFetch();
+    let menu = await api.menu.getFetch();
+
+    banner = banner.result;
+    menu = menu.result;
 
     return (
-       <Content banner={banner} companyInfo={companyInfo} />
+       <Content banner={banner} menu={menu} />
     );
 };
 

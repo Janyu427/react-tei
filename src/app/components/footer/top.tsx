@@ -2,21 +2,14 @@
 "use client"
 
 import { useState, useEffect } from "react";
+
 import Link from "next/link";
 import Image from "next/image";
 
+import logo from "@/public/logo.svg";
+
 interface Props {
-    footer: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    };
+    contactInfo: infoItem [],
 };
 
 interface infoItem {
@@ -27,33 +20,20 @@ interface infoItem {
     link: string
 };
 
-interface socialMediaItem {
-    key: string,
-    titleTag: string,
-    link: string
-};
-
-interface navListItem {
-    key: string,
-    title: string,
-    titleTag: string,
-    link: string
-};
-
 const App = (props: Props) => {
     const [addressInfo, setAddressInfo] = useState<infoItem | null>(null);
 
     const [otherInfo, setOtherInfo] = useState<infoItem []>([]);
 
     useEffect(() => {
-        if (!props.footer.basicInfo) {
+        if (!props.contactInfo) {
             return;
         }
 
         const otherItems: infoItem [] = [];
 
-        for (let i = 0; i < props.footer.basicInfo.length; i ++) {
-            const item = props.footer.basicInfo[i];
+        for (let i = 0; i < props.contactInfo.length; i ++) {
+            const item = props.contactInfo[i];
 
             if (item.key == "address") {
                 setAddressInfo(item);
@@ -64,12 +44,12 @@ const App = (props: Props) => {
         }
 
         setOtherInfo(otherItems);
-    }, [props.footer.basicInfo]);
+    }, [props.contactInfo]);
 
     return (
         <div className="flex pt-[20px] pb-[30px] flex-wrap">
             <Link className="w-[40%] pb-[30px]" href="/">
-                <Image className="max-w-[226px] w-full" src={props.footer.logo.logoNormal} width={226} height={50} alt={props.footer.logo.alt} priority={true} />
+                <Image className="max-w-[226px] w-full" src={logo} width={226} height={50} alt="程翊室內設計" priority={true} />
             </Link>
 
             <div className="py-0 pr-[15px] pb-[30px]">

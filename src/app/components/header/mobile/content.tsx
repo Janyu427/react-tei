@@ -12,18 +12,12 @@ import { useDispatch, useSelector } from "react-redux";
 
 import clsx from "clsx";
 
+import logo from "@/public/logo.svg";
+
 export interface Props {
-    companyInfo: {
-        logo: {
-            logotypeWhite: string,
-            icon: string,
-            logoNormal: string,
-            alt: string
-        }
-        basicInfo: infoItem [],
-        socialMediaInfo: socialMediaItem [],
-        navList: navListItem []
-    }
+    menu: menuItem [],
+    socialMedia: socialMediaItem [],
+    contactInfo: infoItem [],
 };
 
 interface infoItem {
@@ -40,7 +34,7 @@ interface socialMediaItem {
     link: string
 };
 
-interface navListItem {
+interface menuItem {
     key: string,
     title: string,
     titleTag: string,
@@ -84,7 +78,7 @@ const App = (props: Props) => {
             )} ref={headerRef}>
                 <div className="w-[90%] max-w-[1140px] mx-auto flex justify-between items-center">
                         <Link className="logo" href="/" title="程翊室內裝修" >
-                            <Image className="image" src={props.companyInfo.logo.logoNormal} alt={props.companyInfo.logo.alt} width={226} height={50} priority/>
+                            <Image className="image" src={logo} alt="程翊室內裝修" width={226} height={50} priority />
                         </Link>
                         
                         <div className="flex items-center justify-center absolute top-0 right-0 w-[80px] h-[80px] 
@@ -102,7 +96,7 @@ const App = (props: Props) => {
                 (() => {
                     if (openMenu) {
                         return (
-                            <Aside companyInfo={props.companyInfo} setOpenMenu={setOpenMenu} />
+                            <Aside menu={props.menu} contactInfo={props.contactInfo} setOpenMenu={setOpenMenu} />
                         );
                     }
                 })()

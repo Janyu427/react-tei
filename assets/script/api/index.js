@@ -1,22 +1,26 @@
 
-import product from "./product";
-import companyInfo from "./companyInfo";
-import footer from "./footer";
-import contact from "./contact";
 import about from "./about";
 import banner from "./banner";
+import contact from "./contact";
+import contactInfo from "./contactInfo";
 import innerPageTitle from "./innerPageTitle";
-import videoSection from "./videoSection";
+import menu from "./menu";
+import product from "./product";
+import productDetails from "./productDetails";
+import socialMedia from "./socialMedia";
+import video from "./video";
 
 const app = {
-    product: product,
-    companyInfo: companyInfo,
-    footer: footer,
-    contact: contact,
     about: about,
     banner: banner,
+    contact: contact,
+    contactInfo: contactInfo,
     innerPageTitle: innerPageTitle,
-    videoSection: videoSection
+    menu: menu,
+    product: product,
+    productDetails: productDetails,
+    socialMedia: socialMedia,
+    video: video
 };
 
 export default app;

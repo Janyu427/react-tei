@@ -8,7 +8,9 @@ interface Props {
 };
 
 const App = async (props: Props) => {
-    const productLists = await api.product.getCategory.getFetch();
+    let productLists = await api.product.getFetch();
+
+    productLists = productLists.result;
 
     return (
         <Content id={props.id} productLists={productLists} />

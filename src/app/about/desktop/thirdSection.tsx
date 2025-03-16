@@ -13,8 +13,8 @@ const App = async () => {
 
     let sectionContent = null;
     
-    for (let i = 0; i < about.about.length; i ++) {
-        const item = about.about[i];
+    for (let i = 0; i < about.result.length; i ++) {
+        const item = about.result[i];
 
         if (item.key == "thirdSection") {
             sectionContent = item;
